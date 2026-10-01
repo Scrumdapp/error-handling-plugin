@@ -1,5 +1,9 @@
 package com.scrumdapp.errorhandling.error
 
+import com.scrumdapp.errorhandling.errorResponses.ErrorResponse
+import com.scrumdapp.errorhandling.errorResponses.ValidationErrorResponse
+import org.springframework.http.HttpStatus
+
 enum class ErrorCode(
     val code: String,
     val errorTitleKey: String,
@@ -47,6 +51,13 @@ enum class ErrorCode(
         "errorCode.generic.accessDenied.description"
     ),
 
+    // Not yet implemented in FE, used as placeholder for 404 application error
+    NOT_FOUND(
+      "RESOURCE_NOT_FOUND",
+        "errorCode.generic.notFound.title",
+        "errorCode.generic.notFound.description"
+    ),
+
     USER_NOT_FOUND(
         "USER_NOT_FOUND",
         "errorCode.user.notFound.title",
@@ -75,5 +86,15 @@ enum class ErrorCode(
         "SERVICE_UNAVAILABLE",
         "errorCode.generic.serviceUnavailable.title",
         "errorCode.generic.serviceUnavailable.description"
-    )
+    );
+
+    fun toErrorResponse(status: HttpStatus, validationErrors: List<ValidationErrorResponse>? = null): ErrorResponse {
+        return ErrorResponse(
+            status.value(),
+            this.code,
+            this.errorTitleKey,
+            this.errorDescriptionKey,
+            validationErrors
+        )
+    }
 }

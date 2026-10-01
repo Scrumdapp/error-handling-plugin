@@ -1,6 +1,11 @@
 package com.scrumdapp.errorhandling.error
 
 import jakarta.validation.ConstraintViolation
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.Max
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.springframework.validation.FieldError
 
@@ -18,36 +23,35 @@ enum class ValidationErrorType(
 
     companion object {
 
+        private val annotationTypes = mapOf(
+            NotBlank::class.java to NOT_BLANK,
+            NotNull::class.java to NOT_NULL,
+            Email::class.java to EMAIL,
+            Min::class.java to MIN,
+            Max::class.java to MAX,
+        )
+
         fun fromFieldError(fieldError: FieldError): ValidationErrorType {
 
-            if (fieldError.contains(ConstraintViolation::class.java)) {
-                val violation = fieldError.unwrap(ConstraintViolation::class.java)
-                val annotation =
-                    violation.constraintDescriptor.annotation
+            if (!fieldError.contains(ConstraintViolation::class.java)) {
+                return INVALID
+            }
 
-                if (annotation is Size) {
-                    val value = fieldError.rejectedValue
+            val violation = fieldError.unwrap(ConstraintViolation::class.java)
+            return when (val annotation = violation.constraintDescriptor.annotation) {
+                is Size -> fromSize(annotation, fieldError) ?: INVALID
+                else -> annotationTypes[annotation.annotationClass.java] ?: INVALID
+            }
+        }
 
-                    if (value is CharSequence) {
-                        return when {
-                            value.length < annotation.min -> MIN_LENGTH
-                            value.length > annotation.max -> MAX_LENGTH
-                            else -> INVALID
-                        }
-                    }
-                }
-
-                return when (annotation.annotationClass.simpleName) {
-                    "NotBlank" -> NOT_BLANK
-                    "NotNull" -> NOT_NULL
-                    "Email" -> EMAIL
-                    "Min" -> MIN
-                    "Max" -> MAX
+        private fun fromSize(annotation: Size, fieldError: FieldError): ValidationErrorType? {
+            return (fieldError.rejectedValue as? CharSequence)?.let {
+                when {
+                    it.length < annotation.min -> MIN_LENGTH
+                    it.length > annotation.max -> MAX_LENGTH
                     else -> INVALID
                 }
             }
-
-            return INVALID
         }
     }
 }
