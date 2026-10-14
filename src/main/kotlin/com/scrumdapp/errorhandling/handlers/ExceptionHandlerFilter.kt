@@ -32,7 +32,7 @@ class ExceptionHandlerFilter(
     private fun findRootThrowable(throwable: Exception): Exception {
         var result = throwable
 
-        while (result.cause != null && result.cause !== result) {
+        while (result.cause is Exception && result.cause !== result) {
             result = result.cause as Exception
         }
 

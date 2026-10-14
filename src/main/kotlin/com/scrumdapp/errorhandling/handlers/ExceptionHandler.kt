@@ -25,6 +25,9 @@ import org.springframework.web.servlet.NoHandlerFoundException
 import org.springframework.web.servlet.resource.NoResourceFoundException
 import tools.jackson.databind.ObjectMapper
 import java.lang.Exception
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+import org.springframework.security.core.AuthenticationException
+import org.springframework.security.access.AccessDeniedException
 
 @Component
 class ExceptionHandler(
@@ -83,6 +86,15 @@ class ExceptionHandler(
 
             is HttpMessageNotReadableException ->
                 ErrorCode.BAD_REQUEST.toErrorResponse(HttpStatus.BAD_REQUEST)
+
+            is MethodArgumentTypeMismatchException ->
+                ErrorCode.BAD_REQUEST.toErrorResponse(HttpStatus.BAD_REQUEST)
+
+            is AuthenticationException ->
+                ErrorCode.AUTHENTICATION_REQUIRED.toErrorResponse(HttpStatus.UNAUTHORIZED)
+
+            is AccessDeniedException ->
+                ErrorCode.ACCESS_DENIED.toErrorResponse(HttpStatus.FORBIDDEN)
 
             is HttpMessageNotWritableException ->
                 ErrorCode.INTERNAL_ERROR.toErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR)

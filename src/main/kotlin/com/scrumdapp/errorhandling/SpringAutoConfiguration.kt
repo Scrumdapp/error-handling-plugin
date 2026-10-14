@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 import tools.jackson.databind.ObjectMapper
+import com.scrumdapp.errorhandling.handlers.SecurityExceptionHandler
 
 @AutoConfiguration
 class SpringAutoConfiguration {
@@ -20,6 +21,11 @@ class SpringAutoConfiguration {
     @Bean
     fun exceptionFilter(handler: ExceptionHandler): ExceptionHandlerFilter {
         return ExceptionHandlerFilter(handler)
+    }
+    @Bean
+    @ConditionalOnMissingBean
+    fun securityExceptionHandler(handler: ExceptionHandler): SecurityExceptionHandler {
+        return SecurityExceptionHandler(handler)
     }
 
     @Bean
