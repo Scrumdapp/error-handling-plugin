@@ -3,11 +3,12 @@ package com.scrumdapp.errorhandling
 import com.scrumdapp.errorhandling.handlers.CustomHandlerExceptionResolver
 import com.scrumdapp.errorhandling.handlers.ExceptionHandler
 import com.scrumdapp.errorhandling.handlers.ExceptionHandlerFilter
+import com.scrumdapp.errorhandling.handlers.SecurityAccessDeniedHandler
+import com.scrumdapp.errorhandling.handlers.SecurityAuthenticationEntryPoint
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 import tools.jackson.databind.ObjectMapper
-import com.scrumdapp.errorhandling.handlers.SecurityExceptionHandler
 
 @AutoConfiguration
 class SpringAutoConfiguration {
@@ -24,8 +25,14 @@ class SpringAutoConfiguration {
     }
     @Bean
     @ConditionalOnMissingBean
-    fun securityExceptionHandler(handler: ExceptionHandler): SecurityExceptionHandler {
-        return SecurityExceptionHandler(handler)
+    fun securityAuthenticationEntryPoint(handler: ExceptionHandler): SecurityAuthenticationEntryPoint {
+        return SecurityAuthenticationEntryPoint(handler)
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    fun securityAccessDeniedHandler(handler: ExceptionHandler): SecurityAccessDeniedHandler {
+        return SecurityAccessDeniedHandler(handler)
     }
 
     @Bean

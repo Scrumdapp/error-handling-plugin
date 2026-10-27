@@ -1,11 +1,8 @@
 
 package com.scrumdapp.errorhandling.handlers
 
-import com.scrumdapp.errorhandling.error.ErrorCode
-import jakarta.servlet.http.HttpServletRequest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.springframework.http.HttpStatus
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.security.access.AccessDeniedException
@@ -14,30 +11,45 @@ import tools.jackson.databind.ObjectMapper
 
 class ExceptionHandlerTest {
 
-    private val handler = ExceptionHandler(ObjectMapper())
+    private val exceptionHandler = ExceptionHandler(ObjectMapper())
 
-    private fun handle(exception: Exception): MockHttpServletResponse {
+    private fun handleAuthenticationException(exception: BadCredentialsException): MockHttpServletResponse {
         val request = MockHttpServletRequest()
         val response = MockHttpServletResponse()
 
-        handler.handleException(request, response, exception)
+        SecurityAuthenticationEntryPoint(exceptionHandler).commence(request, response, exception)
+
+        return response
+    }
+
+    private fun handleAccessDeniedException(exception: AccessDeniedException): MockHttpServletResponse {
+        val request = MockHttpServletRequest()
+        val response = MockHttpServletResponse()
+
+        SecurityAccessDeniedHandler(exceptionHandler).handle(request, response, exception)
 
         return response
     }
 
     @Test
     fun `authentication exception returns 401`() {
-        val response = handle(BadCredentialsException("Invalid credentials"))
+        val response = handleAuthenticationException(BadCredentialsException("Invalid credentials"))
 
         assertEquals(401, response.status)
-        assertEquals(true, response.contentAsString.contains("AUTHENTICATION_REQUIRED"))
+        val json = ObjectMapper().readTree(response.contentAsString)
+        assertEquals("AUTHENTICATION_REQUIRED", json["code"].stringValue())
+        assertEquals("errorCode.generic.authenticationRequired.title", json["errorTitleKey"].stringValue())
+        assertEquals("errorCode.generic.authenticationRequired.description", json["errorDescriptionKey"].stringValue())
     }
 
     @Test
     fun `access denied exception returns 403`() {
-        val response = handle(AccessDeniedException("Access denied"))
+        val response = handleAccessDeniedException(AccessDeniedException("Access denied"))
 
         assertEquals(403, response.status)
-        assertEquals(true, response.contentAsString.contains("ACCESS_DENIED"))
+        val json = ObjectMapper().readTree(response.contentAsString)
+        assertEquals("ACCESS_DENIED", json["code"].stringValue())
+        assertEquals("errorCode.generic.accessDenied.title", json["errorTitleKey"].stringValue())
+        assertEquals("errorCode.generic.accessDenied.description", json["errorDescriptionKey"].stringValue())
     }
 }
