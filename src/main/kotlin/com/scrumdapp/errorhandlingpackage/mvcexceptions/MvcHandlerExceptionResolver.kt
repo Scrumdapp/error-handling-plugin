@@ -1,8 +1,8 @@
-package com.scrumdapp.errorhandlingpackage.interceptors
+package com.scrumdapp.errorhandlingpackage.mvcexceptions
 
 import com.scrumdapp.errorhandlingpackage.ApplicationExceptionLogger
 import com.scrumdapp.errorhandlingpackage.exceptions.validation.ValidationException
-import com.scrumdapp.errorhandlingpackage.utils.MvcExceptionConverter
+import com.scrumdapp.errorhandlingpackage.mvcexceptions.MvcExceptionConverter
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.core.Ordered
@@ -16,7 +16,7 @@ import java.lang.Exception
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-class ApplicationHandlerExceptionResolver(
+class MvcHandlerExceptionResolver(
     private val exceptionConverter: MvcExceptionConverter,
     private val logger: ApplicationExceptionLogger,
     private val objectMapper: ObjectMapper

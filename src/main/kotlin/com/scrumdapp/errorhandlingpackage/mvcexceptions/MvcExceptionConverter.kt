@@ -1,4 +1,4 @@
-package com.scrumdapp.errorhandlingpackage.utils
+package com.scrumdapp.errorhandlingpackage.mvcexceptions
 
 import com.scrumdapp.errorhandlingpackage.exceptions.ApplicationException
 import com.scrumdapp.errorhandlingpackage.exceptions.generic.GenericNotFoundException
@@ -106,7 +106,8 @@ class MvcExceptionConverter {
         return ex.bindingResult.allErrors.map { error ->
             ValidationFieldError(
                 field = (error as FieldError).field,
-                translationKey = error.defaultMessage ?: "errors.validation.field.invalid" //TODO("Check if this is the default validation code")
+                translationKey = error.defaultMessage
+                    ?: "errors.validation.field.invalid" //TODO("Check if this is the default validation code")
             )
         }
     }

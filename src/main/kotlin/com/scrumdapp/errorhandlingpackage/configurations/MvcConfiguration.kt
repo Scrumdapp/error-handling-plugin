@@ -1,13 +1,13 @@
 package com.scrumdapp.errorhandlingpackage.configurations
 
-import com.scrumdapp.errorhandlingpackage.interceptors.ApplicationHandlerExceptionResolver
+import com.scrumdapp.errorhandlingpackage.mvcexceptions.MvcHandlerExceptionResolver
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.HandlerExceptionResolver
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 class MvcConfiguration(
-    private val resolver: ApplicationHandlerExceptionResolver
+    private val resolver: MvcHandlerExceptionResolver
 ): WebMvcConfigurer {
 
     override fun extendHandlerExceptionResolvers(resolvers: MutableList<HandlerExceptionResolver>) {

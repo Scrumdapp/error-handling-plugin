@@ -1,8 +1,6 @@
 package com.scrumdapp.errorhandlingpackage.exceptions.validation
 
 import com.scrumdapp.errorhandlingpackage.exceptions.ApplicationException
-import com.scrumdapp.errorhandlingpackage.exceptions.ErrorResponse
-import com.scrumdapp.errorhandlingpackage.exceptions.ValidationErrorResponse
 import org.slf4j.event.Level
 import org.springframework.http.HttpStatus
 

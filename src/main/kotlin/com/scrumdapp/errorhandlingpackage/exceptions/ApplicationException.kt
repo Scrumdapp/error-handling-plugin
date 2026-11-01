@@ -12,8 +12,8 @@ abstract class ApplicationException(
     val enableLogging: Boolean,
     cause: Throwable?
 ): RuntimeException(message, cause) {
-    fun convertToResponse(): ErrorResponse {
-        return ErrorResponse(
+    fun convertToResponse(): ApplicationErrorResponse {
+        return ApplicationErrorResponse(
             this.status.value(),
             this.message,
             this.errorTitleKey,
