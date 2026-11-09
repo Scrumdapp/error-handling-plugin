@@ -25,9 +25,10 @@ class TestSecurityConfig(
         http
             .csrf { it.disable() }
             .usePassport(passportFilter)
-            .useExceptionHandling(authenticationEntryPoint, accessDeniedHandler).formLogin(withDefaults())
+            .useExceptionHandling(authenticationEntryPoint, accessDeniedHandler)
+            .formLogin(withDefaults())
             .authorizeHttpRequests {
-                it.anyRequest().hasAnyAuthority("STUDENT", "COACH")
+                it.anyRequest().permitAll()
             }
 
         return http.build()

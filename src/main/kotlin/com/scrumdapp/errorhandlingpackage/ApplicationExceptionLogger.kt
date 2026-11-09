@@ -3,7 +3,6 @@ package com.scrumdapp.errorhandlingpackage
 import com.scrumdapp.errorhandlingpackage.exceptions.ApplicationException
 import com.scrumdapp.errorhandlingpackage.exceptions.security.ForbiddenException
 import com.scrumdapp.errorhandlingpackage.exceptions.security.NotAuthorizedException
-import com.scrumdapp.passportplugin.jwt.PassportContent
 import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -16,7 +15,12 @@ import org.springframework.stereotype.Component
 class ApplicationExceptionLogger(
     private val logger: Logger = LoggerFactory.getLogger(ApplicationExceptionLogger::class.java)
 ) {
-    fun logException(ex: ApplicationException) {
+    fun logException(ex: ApplicationException, request: HttpServletRequest) {
+
+        if (ex is ForbiddenException || ex is NotAuthorizedException) {
+            logSecurityException(ex, request)
+        }
+
         if (!ex.enableLogging) return
 
         //TODO("figure out better logging format")

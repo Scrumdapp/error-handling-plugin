@@ -4,7 +4,7 @@ import com.scrumdapp.errorhandlingpackage.exceptions.ApplicationException
 import org.slf4j.event.Level
 import org.springframework.http.HttpStatus
 
-class GenericNotFoundException(
+class ResourceNotFoundException(
     cause: Throwable? = null,
     enableLogging: Boolean = true,
     logLevel: Level = Level.DEBUG

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus
 
 class ForbiddenException(
     cause: Throwable? = null,
-    enableLogging: Boolean = false,
+    enableLogging: Boolean = true,
     logLevel: Level = Level.INFO,
 ): ApplicationException(
     HttpStatus.FORBIDDEN,

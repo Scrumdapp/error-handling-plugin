@@ -1,7 +1,7 @@
 package com.scrumdapp.errorhandlingpackage.mvcexceptions
 
 import com.scrumdapp.errorhandlingpackage.exceptions.ApplicationException
-import com.scrumdapp.errorhandlingpackage.exceptions.generic.GenericNotFoundException
+import com.scrumdapp.errorhandlingpackage.exceptions.generic.ResourceNotFoundException
 import com.scrumdapp.errorhandlingpackage.exceptions.generic.InternalServerErrorException
 import com.scrumdapp.errorhandlingpackage.exceptions.generic.MediaTypeNotSupportedException
 import com.scrumdapp.errorhandlingpackage.exceptions.generic.MethodNotAllowedException
@@ -93,9 +93,9 @@ class MvcExceptionConverter {
                 )
 
             is NoHandlerFoundException ->
-                GenericNotFoundException(ex.cause)
+                ResourceNotFoundException(ex.cause)
             is NoResourceFoundException ->
-                GenericNotFoundException(ex.cause)
+                ResourceNotFoundException(ex.cause)
 
             else ->
                 InternalServerErrorException(cause = ex)

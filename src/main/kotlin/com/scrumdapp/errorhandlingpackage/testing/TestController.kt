@@ -1,10 +1,10 @@
 package com.scrumdapp.errorhandlingpackage.testing
 
-import com.scrumdapp.errorhandlingpackage.exceptions.generic.InternalServerErrorException
+import com.scrumdapp.errorhandlingpackage.exceptions.security.ForbiddenException
+import com.scrumdapp.passportplugin.annotations.groupAccess.IsInGroup
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
-import jdk.internal.util.xml.impl.Input
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,12 +18,20 @@ class TestController {
 
     @GetMapping("/exceptionTest")
     fun testException() {
-        throw InternalServerErrorException()
+        throw ForbiddenException()
     }
 
     @GetMapping("/pathTest")
     fun testPath(
         @RequestParam(value = "sample", required = true) query: String,
+    ): ResponseEntity<String> {
+        return ResponseEntity.ok("OK")
+    }
+
+    @GetMapping("/pathTest/{groupId}")
+    @IsInGroup
+    fun testGroup(
+        @PathVariable groupId: Long,
     ): ResponseEntity<String> {
         return ResponseEntity.ok("OK")
     }
