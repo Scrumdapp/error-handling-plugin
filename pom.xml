@@ -10,9 +10,9 @@
     </parent>
     <groupId>com.scrumdapp</groupId>
     <artifactId>error-handling-package</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>error-handling-package</name>
-    <description>error-handling-package</description>
+    <description>Library for handling exceptions in Scrumdapp microservices</description>
     <url/>
     <licenses>
         <license/>
