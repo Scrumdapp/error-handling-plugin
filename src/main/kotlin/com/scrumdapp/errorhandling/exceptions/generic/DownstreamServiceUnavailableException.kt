@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus
 
 class DownstreamServiceUnavailableException(
     cause: Throwable? = null,
-    enableLogging: Boolean = true,
     logLevel: Level = Level.WARN,
 ): ApplicationException(
     HttpStatus.SERVICE_UNAVAILABLE,
@@ -14,6 +13,5 @@ class DownstreamServiceUnavailableException(
     "errors.generic.serviceUnavailable.title",
     "errors.generic.serviceUnavailable.description",
     logLevel,
-    enableLogging,
     cause,
 )

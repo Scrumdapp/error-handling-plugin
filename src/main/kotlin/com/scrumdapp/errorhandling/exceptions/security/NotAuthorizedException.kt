@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus
 
 class NotAuthorizedException(
     cause: Throwable? = null,
-    enableLogging: Boolean = true,
     logLevel: Level = Level.INFO,
 ): ApplicationException(
     HttpStatus.UNAUTHORIZED,
@@ -14,6 +13,5 @@ class NotAuthorizedException(
     "errors.generic.authenticationRequired.title",
     "errors.generic.authenticationRequired.description",
     logLevel,
-    enableLogging,
     cause,
 )

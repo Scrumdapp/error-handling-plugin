@@ -6,14 +6,12 @@ import org.springframework.http.HttpStatus
 
 class NotAcceptableException(
     cause: Throwable? = null,
-    enableLogging: Boolean = false,
-    logLevel: Level = Level.WARN,
+    logLevel: Level = Level.DEBUG,
 ): ApplicationException(
     HttpStatus.NOT_ACCEPTABLE,
     "NOT_ACCEPTABLE",
     "errors.generic.notAcceptable.title", // Warning, translation not implemented on FE
     "errors.generic.notAcceptable.description",
     logLevel,
-    enableLogging,
     cause,
 )

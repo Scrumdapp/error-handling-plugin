@@ -6,6 +6,7 @@ import com.scrumdapp.errorhandling.exceptions.generic.InternalServerErrorExcepti
 import com.scrumdapp.errorhandling.exceptions.generic.MediaTypeNotSupportedException
 import com.scrumdapp.errorhandling.exceptions.generic.MethodNotAllowedException
 import com.scrumdapp.errorhandling.exceptions.generic.NotAcceptableException
+import com.scrumdapp.errorhandling.exceptions.security.ForbiddenException
 import com.scrumdapp.errorhandling.exceptions.validation.ValidationException
 import com.scrumdapp.errorhandling.exceptions.validation.ValidationFieldError
 import org.springframework.beans.TypeMismatchException
@@ -47,15 +48,7 @@ class MvcExceptionConverter {
                     ex.cause
                 )
             is MissingPathVariableException ->
-                ValidationException(
-                    listOf(
-                        ValidationFieldError(
-                            "path",
-                            "errors.validation.pathVariableMissing"
-                        )
-                    ),
-                    ex.cause
-                )
+                ResourceNotFoundException(ex.cause)
             is HttpMessageNotReadableException ->
                 ValidationException(
                     listOf(
@@ -67,25 +60,9 @@ class MvcExceptionConverter {
                     ex.cause
                 )
             is MissingRequestHeaderException ->
-                ValidationException(
-                    listOf(
-                        ValidationFieldError(
-                            "header",
-                            "errors.validation.requestHeaderMissing"
-                        )
-                    ),
-                    ex.cause
-                )
+                ForbiddenException()
             is TypeMismatchException ->
-                ValidationException(
-                    listOf(
-                        ValidationFieldError(
-                            "path",
-                            "errors.validation.pathInvalid"
-                        )
-                    ),
-                    ex.cause
-                )
+                InternalServerErrorException(ex.cause)
             is MethodArgumentNotValidException ->
                 ValidationException(
                     extractValidationErrors(ex),

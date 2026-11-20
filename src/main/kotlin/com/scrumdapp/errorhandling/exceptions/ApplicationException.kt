@@ -9,7 +9,6 @@ abstract class ApplicationException(
     val errorTitleKey: String,
     val errorDescriptionKey: String,
     val logLevel: Level,
-    val enableLogging: Boolean,
     cause: Throwable?
 ): RuntimeException(message, cause) {
     fun convertToResponse(): ApplicationErrorResponse {

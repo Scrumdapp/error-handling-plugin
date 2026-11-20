@@ -6,14 +6,12 @@ import org.springframework.http.HttpStatus
 
 class ForbiddenException(
     cause: Throwable? = null,
-    enableLogging: Boolean = true,
-    logLevel: Level = Level.INFO,
+    logLevel: Level = Level.DEBUG,
 ): ApplicationException(
     HttpStatus.FORBIDDEN,
     "ACCESS_DENIED",
     "errors.generic.accessDenied.title",
     "errors.generic.accessDenied.description",
     logLevel,
-    enableLogging,
     cause,
 )

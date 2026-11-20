@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus
 class ValidationException(
     val errors: List<ValidationFieldError>,
     cause: Throwable? = null,
-    enableLogging: Boolean = false,
     logLevel: Level = Level.DEBUG,
 ): ApplicationException(
     HttpStatus.BAD_REQUEST,
@@ -15,7 +14,6 @@ class ValidationException(
     "errors.validation.failed.title",
     "errors.validation.failed.message",
     logLevel,
-    enableLogging,
     cause,
 ) {
      fun convertToValidationResponse(): ValidationErrorResponse {

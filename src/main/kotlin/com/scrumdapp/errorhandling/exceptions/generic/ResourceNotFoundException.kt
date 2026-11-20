@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus
 
 class ResourceNotFoundException(
     cause: Throwable? = null,
-    enableLogging: Boolean = true,
     logLevel: Level = Level.DEBUG
 ): ApplicationException(
     HttpStatus.NOT_FOUND,
@@ -14,6 +13,5 @@ class ResourceNotFoundException(
     "errors.generic.notFound.title",
     "errors.generic.notFound.description",
     logLevel,
-    enableLogging,
     cause,
 )
