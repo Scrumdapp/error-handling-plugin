@@ -1,6 +1,6 @@
 package com.scrumdapp.errorhandling.configurations
 
-import com.scrumdapp.errorhandling.mvcexceptions.MvcHandlerExceptionResolver
+import com.scrumdapp.errorhandling.mvc.MvcHandlerExceptionResolver
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.HandlerExceptionResolver
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer

@@ -1,8 +1,8 @@
-package com.scrumdapp.errorhandling
+package com.scrumdapp.errorhandling.logging
 
-import com.scrumdapp.errorhandling.exceptions.ApplicationException
-import com.scrumdapp.errorhandling.exceptions.security.ForbiddenException
-import com.scrumdapp.errorhandling.exceptions.security.NotAuthorizedException
+import com.scrumdapp.errorhandling.mvc.exceptions.ApplicationException
+import com.scrumdapp.errorhandling.security.exceptions.ForbiddenException
+import com.scrumdapp.errorhandling.security.exceptions.NotAuthorizedException
 import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

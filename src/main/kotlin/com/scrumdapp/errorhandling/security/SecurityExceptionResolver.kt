@@ -1,9 +1,9 @@
-package com.scrumdapp.errorhandling.securityhandlers
+package com.scrumdapp.errorhandling.security
 
-import com.scrumdapp.errorhandling.ApplicationExceptionLogger
-import com.scrumdapp.errorhandling.exceptions.ApplicationException
-import com.scrumdapp.errorhandling.exceptions.security.ForbiddenException
-import com.scrumdapp.errorhandling.exceptions.security.NotAuthorizedException
+import com.scrumdapp.errorhandling.logging.ApplicationExceptionLogger
+import com.scrumdapp.errorhandling.mvc.exceptions.ApplicationException
+import com.scrumdapp.errorhandling.security.exceptions.ForbiddenException
+import com.scrumdapp.errorhandling.security.exceptions.NotAuthorizedException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.MediaType

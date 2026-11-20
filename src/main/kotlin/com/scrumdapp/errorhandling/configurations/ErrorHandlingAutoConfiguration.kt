@@ -1,11 +1,11 @@
 package com.scrumdapp.errorhandling.configurations
 
-import com.scrumdapp.errorhandling.ApplicationExceptionLogger
-import com.scrumdapp.errorhandling.mvcexceptions.MvcHandlerExceptionResolver
-import com.scrumdapp.errorhandling.mvcexceptions.MvcExceptionConverter
-import com.scrumdapp.errorhandling.securityhandlers.CustomAccessDeniedHandler
-import com.scrumdapp.errorhandling.securityhandlers.CustomAuthenticationEntrypoint
-import com.scrumdapp.errorhandling.securityhandlers.SecurityExceptionResolver
+import com.scrumdapp.errorhandling.logging.ApplicationExceptionLogger
+import com.scrumdapp.errorhandling.mvc.MvcHandlerExceptionResolver
+import com.scrumdapp.errorhandling.mvc.MvcExceptionConverter
+import com.scrumdapp.errorhandling.security.CustomAccessDeniedHandler
+import com.scrumdapp.errorhandling.security.CustomAuthenticationEntrypoint
+import com.scrumdapp.errorhandling.security.SecurityExceptionResolver
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean

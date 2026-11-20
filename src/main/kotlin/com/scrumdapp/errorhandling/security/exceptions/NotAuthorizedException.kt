@@ -1,6 +1,6 @@
-package com.scrumdapp.errorhandling.exceptions.security
+package com.scrumdapp.errorhandling.security.exceptions
 
-import com.scrumdapp.errorhandling.exceptions.ApplicationException
+import com.scrumdapp.errorhandling.mvc.exceptions.ApplicationException
 import org.slf4j.event.Level
 import org.springframework.http.HttpStatus
 

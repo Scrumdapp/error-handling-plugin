@@ -1,14 +1,14 @@
-package com.scrumdapp.errorhandling.mvcexceptions
+package com.scrumdapp.errorhandling.mvc
 
-import com.scrumdapp.errorhandling.exceptions.ApplicationException
-import com.scrumdapp.errorhandling.exceptions.generic.ResourceNotFoundException
-import com.scrumdapp.errorhandling.exceptions.generic.InternalServerErrorException
-import com.scrumdapp.errorhandling.exceptions.generic.MediaTypeNotSupportedException
-import com.scrumdapp.errorhandling.exceptions.generic.MethodNotAllowedException
-import com.scrumdapp.errorhandling.exceptions.generic.NotAcceptableException
-import com.scrumdapp.errorhandling.exceptions.security.ForbiddenException
-import com.scrumdapp.errorhandling.exceptions.validation.ValidationException
-import com.scrumdapp.errorhandling.exceptions.validation.ValidationFieldError
+import com.scrumdapp.errorhandling.mvc.exceptions.ApplicationException
+import com.scrumdapp.errorhandling.mvc.exceptions.ResourceNotFoundException
+import com.scrumdapp.errorhandling.mvc.exceptions.InternalServerErrorException
+import com.scrumdapp.errorhandling.mvc.exceptions.MediaTypeNotSupportedException
+import com.scrumdapp.errorhandling.mvc.exceptions.MethodNotAllowedException
+import com.scrumdapp.errorhandling.mvc.exceptions.NotAcceptableException
+import com.scrumdapp.errorhandling.security.exceptions.ForbiddenException
+import com.scrumdapp.errorhandling.mvc.exceptions.validation.ValidationException
+import com.scrumdapp.errorhandling.mvc.exceptions.validation.ValidationFieldError
 import org.springframework.beans.TypeMismatchException
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.stereotype.Component

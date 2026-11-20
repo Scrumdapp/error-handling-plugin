@@ -1,4 +1,4 @@
-package com.scrumdapp.errorhandling.securityhandlers
+package com.scrumdapp.errorhandling.security
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

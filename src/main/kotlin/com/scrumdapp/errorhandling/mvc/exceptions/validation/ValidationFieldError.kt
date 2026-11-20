@@ -1,4 +1,4 @@
-package com.scrumdapp.errorhandling.exceptions.validation
+package com.scrumdapp.errorhandling.mvc.exceptions.validation
 
 data class ValidationFieldError(
     val field: String,

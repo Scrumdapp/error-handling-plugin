@@ -1,4 +1,4 @@
-package com.scrumdapp.errorhandling.securityhandlers
+package com.scrumdapp.errorhandling.security
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 

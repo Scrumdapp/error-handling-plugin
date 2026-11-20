@@ -1,4 +1,4 @@
-package com.scrumdapp.errorhandling.exceptions
+package com.scrumdapp.errorhandling.mvc.exceptions
 
 data class ApplicationErrorResponse(
     val status: Int,

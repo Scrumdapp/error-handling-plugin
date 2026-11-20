@@ -1,7 +1,7 @@
-package com.scrumdapp.errorhandling.mvcexceptions
+package com.scrumdapp.errorhandling.mvc
 
-import com.scrumdapp.errorhandling.ApplicationExceptionLogger
-import com.scrumdapp.errorhandling.exceptions.validation.ValidationException
+import com.scrumdapp.errorhandling.logging.ApplicationExceptionLogger
+import com.scrumdapp.errorhandling.mvc.exceptions.validation.ValidationException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.core.Ordered
