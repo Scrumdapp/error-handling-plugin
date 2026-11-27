@@ -14,13 +14,14 @@ import org.springframework.stereotype.Component
 class ApplicationExceptionLogger(
     private val logger: Logger = LoggerFactory.getLogger(ApplicationExceptionLogger::class.java)
 ) {
+
     fun logException(ex: ApplicationException, request: HttpServletRequest) {
 
         if (ex is ForbiddenException || ex is NotAuthorizedException) {
             logSecurityException(ex, request)
         }
 
-        logger.atLevel(ex.logLevel).log(ex.message, ex)
+        logger.atLevel(ex.logLevel).log(ex.message, ex.cause ?: ex)
     }
 
     fun logSecurityException(ex: ApplicationException, request: HttpServletRequest) {

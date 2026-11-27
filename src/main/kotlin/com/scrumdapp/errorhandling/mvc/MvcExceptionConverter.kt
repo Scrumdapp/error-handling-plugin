@@ -1,6 +1,7 @@
 package com.scrumdapp.errorhandling.mvc
 
 import com.scrumdapp.errorhandling.mvc.exceptions.ApplicationException
+import com.scrumdapp.errorhandling.mvc.exceptions.BadRequestException
 import com.scrumdapp.errorhandling.mvc.exceptions.ResourceNotFoundException
 import com.scrumdapp.errorhandling.mvc.exceptions.InternalServerErrorException
 import com.scrumdapp.errorhandling.mvc.exceptions.MediaTypeNotSupportedException
@@ -36,29 +37,12 @@ class MvcExceptionConverter {
                 MediaTypeNotSupportedException(ex.cause)
             is HttpMediaTypeNotAcceptableException ->
                 NotAcceptableException(ex.cause)
-
             is MissingServletRequestParameterException ->
-                ValidationException(
-                    listOf(
-                        ValidationFieldError(
-                            "query",
-                            "errors.validation.queryVariableMissing"
-                        )
-                    ),
-                    ex.cause
-                )
+                BadRequestException(ex.cause)
             is MissingPathVariableException ->
                 ResourceNotFoundException(ex.cause)
             is HttpMessageNotReadableException ->
-                ValidationException(
-                    listOf(
-                        ValidationFieldError(
-                            "request",
-                            "errors.validation.requestInvalid"
-                        )
-                    ),
-                    ex.cause
-                )
+                BadRequestException(ex.cause)
             is MissingRequestHeaderException ->
                 ForbiddenException()
             is TypeMismatchException ->
@@ -84,7 +68,7 @@ class MvcExceptionConverter {
             ValidationFieldError(
                 field = (error as FieldError).field,
                 translationKey = error.defaultMessage
-                    ?: "errors.validation.field.invalid" //TODO("Check if this is the default validation code")
+                    ?: "errors.validation.field.invalid"
             )
         }
     }

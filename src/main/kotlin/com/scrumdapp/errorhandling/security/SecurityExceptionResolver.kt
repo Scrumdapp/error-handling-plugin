@@ -23,7 +23,7 @@ class SecurityExceptionResolver(
             is AccessDeniedException ->
                 ForbiddenException(ex.cause)
             is AuthenticationException ->
-                NotAuthorizedException(ex.cause, enableLogging = true)
+                NotAuthorizedException(ex.cause)
             else ->
                 NotAuthorizedException(ex)
         }
